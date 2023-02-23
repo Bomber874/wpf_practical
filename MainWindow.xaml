@@ -1,0 +1,100 @@
+﻿<Window x:Class="wpf_practical.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpf_practical"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Главное окно" Height="450" Width="801" Closed="Window_Closed" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ToolBar>
+            <Menu>
+                <MenuItem Header="Действие">
+                    <MenuItem Header="Выгрузить в файл" x:Name="saveMenuItem" Click="saveMenuItem_Selected"/>
+                    <MenuItem Header="Очистить таблицу" x:Name="clearMenuItem"/>
+                </MenuItem>
+            </Menu>
+
+
+
+            <Button x:Name="openLog" Click="openLog_Click">Открыть лог</Button>
+            <Menu>
+                <MenuItem Header="Редактирование">
+                    <MenuItem Header="Разрешить редактирование"/>
+                    <MenuItem Header="Запретить"/>
+                </MenuItem>
+            </Menu>
+            <Menu>
+                <MenuItem Header="Клиенты">
+                    <MenuItem Header="Добавить клиента" x:Name="addClientMenuItem" Click="addClientMenuItem_Click"/>
+                    <MenuItem Header="Список клиентов"/>
+                </MenuItem>
+            </Menu>
+        </ToolBar>
+        <WrapPanel Grid.Row="1" Grid.Column="0">
+            <StackPanel>
+                <Label>№ Заказа</Label>
+                <xctk:IntegerUpDown x:Name="orderNumber" LostFocus="orderNumber_LostFocus"></xctk:IntegerUpDown>
+            </StackPanel>
+            <StackPanel>
+                <Label>Дата заказа</Label>
+                <DatePicker x:Name="dateInput"  Height="30" LostFocus="dateInput_LostFocus"></DatePicker>
+            </StackPanel>
+            <StackPanel MinWidth="160">
+                <Label>ФИО/Название</Label>
+                <TextBox x:Name="nameInput" Height="30" LostFocus="nameInput_LostFocus"></TextBox>
+            </StackPanel>
+            <StackPanel MinWidth="160">
+                <Label>Наименование услуги</Label>
+                <TextBox x:Name="serviceInput" Height="30" LostFocus="serviceInput_LostFocus"></TextBox>
+            </StackPanel>
+            <StackPanel MinWidth="160">
+                <Label>Вид услуги</Label>
+                <ComboBox x:Name="serviceTypeInput" LostFocus="serviceTypeInput_LostFocus">
+                    <ComboBoxItem>dsa</ComboBoxItem>
+                    <ComboBoxItem>dssddsa</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel MinWidth="160">
+                <Label>Объём услуги</Label>
+                <xctk:MaskedTextBox x:Name="timeInput" Mask="Дней:00\,Часов:00\,Минут:00\." LostFocus="timeInput_LostFocus"></xctk:MaskedTextBox>
+            </StackPanel>
+            <StackPanel MinWidth="160">
+                <Label>Скидка</Label>
+                <TextBox x:Name="discountInput" LostFocus="discountInput_LostFocus"></TextBox>
+            </StackPanel>
+            <StackPanel MinWidth="160">
+                <Label>Стоимость услуги</Label>
+                <TextBox x:Name="costInput" LostFocus="costInput_LostFocus"></TextBox>
+            </StackPanel>
+            <StackPanel MinWidth="160" Height="22">
+                <CheckBox x:Name="done" Checked="done_Checked">Услуга оказана?</CheckBox>
+            </StackPanel>
+        </WrapPanel>
+        <Button x:Name="saveButton" Click="saveButton_Click" Grid.Row="2">Сохранить в список</Button>
+        <DataGrid x:Name="dataGridView1" Grid.Row="3" AutoGenerateColumns="False" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер заказа"  Binding="{Binding id}"/>
+                <DataGridTextColumn Header="Дата заказа" Binding="{Binding date}"/>
+                <DataGridTextColumn Header="ФИО/Название" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Наименование" Binding="{Binding service}"/>
+                <DataGridTextColumn Header="Вид услуги" Binding="{Binding serviceType}"/>
+                <DataGridTextColumn Header="Объём услуги" Binding="{Binding time}"/>
+                <DataGridTextColumn Header="Скидка" Binding="{Binding discount}"/>
+                <DataGridTextColumn Header="Стоимость" Binding="{Binding cost}"/>
+                <DataGridTextColumn Header="Выполнена" Binding="{Binding done}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="exportToFileButton" Click="exportToFileButton_Click" Grid.Row="4">Выгрузить таблицу в файл</Button>
+        <RichTextBox x:Name="statusBarText" Grid.Row="5"></RichTextBox>
+    </Grid>
+</Window>

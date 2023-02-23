@@ -1,0 +1,24 @@
+﻿<Window x:Class="wpf_practical.SaveDialogue"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpf_practical"
+        mc:Ignorable="d"
+        Title="Сохранить в текстовый файл" Height="150" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold">Название файла:</Label>
+        <TextBox x:Name="fileNameInput" Height="Auto" Width="Auto" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"></TextBox>
+        <Button Grid.Row="3" Grid.Column="0" Click="Button_Click">Сохранить</Button>
+        <Button Grid.Row="3" Grid.Column="1" Click="Button_Click_1">Отмена</Button>
+    </Grid>
+</Window>

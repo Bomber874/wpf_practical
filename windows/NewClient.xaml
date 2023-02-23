@@ -1,0 +1,40 @@
+﻿<Window x:Class="wpf_practical.windows.NewClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpf_practical.windows"
+        mc:Ignorable="d"
+        Title="Регистрация нового клиента" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Имя:</Label>
+            <TextBox DockPanel.Dock="Top"></TextBox>
+        </DockPanel>
+        <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Фамилия:</Label>
+            <TextBox DockPanel.Dock="Top"></TextBox>
+        </DockPanel>
+        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Дата рождения:</Label>
+            <TextBox DockPanel.Dock="Top"></TextBox>
+        </DockPanel>
+        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Номер телефона:</Label>
+            <TextBox DockPanel.Dock="Top"></TextBox>
+        </DockPanel>
+        <Button Grid.Row="4" Grid.Column="0">Сохранить</Button>
+        <Button Grid.Row="4" Grid.Column="1">Отмена</Button>
+    </Grid>
+</Window>
