@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:wpf_practical.windows"
         mc:Ignorable="d"
         Title="Регистрация нового клиента" Height="450" Width="800">
-    <Grid>
+
+    <Grid Validation.Error="TextBoxValidation_Error">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -20,19 +22,40 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Имя:</Label>
-            <TextBox DockPanel.Dock="Top" x:Name="firstName" Text="{Binding firstname}"></TextBox>
+            <TextBox DockPanel.Dock="Top" x:Name="firstName">
+                <Binding Path="firstname" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule></ExceptionValidationRule>
+                        <local:NameVRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
         </DockPanel>
         <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Фамилия:</Label>
-            <TextBox DockPanel.Dock="Top" x:Name="lastName" Text="{Binding lastname}"></TextBox>
+            <TextBox DockPanel.Dock="Top" x:Name="lastName">
+                <Binding Path="lastname" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule></ExceptionValidationRule>
+                        <local:NameVRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Дата рождения:</Label>
-            <TextBox DockPanel.Dock="Top" x:Name="birthDay" Text="{Binding birthday}"></TextBox>
+            <DatePicker DockPanel.Dock="Top" x:Name="birthday" SelectedDate="{Binding birthday}" FirstDayOfWeek="Monday"/>
         </DockPanel>
         <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Номер телефона:</Label>
-            <TextBox DockPanel.Dock="Top" x:Name="phoneNumber" Text="{Binding phonenumber}"></TextBox>
+            <TextBox DockPanel.Dock="Top" x:Name="phoneNumber">
+                <Binding Path="phonenumber" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                        <local:PhoneVRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
         </DockPanel>
         <Button Grid.Row="4" Grid.Column="0" x:Name="saveButton" Click="saveButton_Click">Сохранить</Button>
         <Button Grid.Row="4" Grid.Column="1" x:Name="cancelButton" Click="cancelButton_Click">Отмена</Button>

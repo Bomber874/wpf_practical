@@ -23,7 +23,8 @@ namespace wpf_practical
     /// </summary>
     public partial class MainWindow : Window
     {
-        dbModel model = new dbModel();
+        dbModel db = dbModel.Instance;
+
         StatusBar statusBar;
         public string logFileName = "";
         bool AllowEdit = false;
@@ -70,22 +71,13 @@ namespace wpf_practical
             logFileName = $"logs/{DateTime.Now.ToShortDateString().Replace('.', '-')}-{DateTime.Now.ToShortTimeString().Replace(':', '-')}.log";
             statusBar = new StatusBar(statusBarText, logFileName);
             statusBar.Show("Программа запущена", StatusBar.TYPE.OK);
-            //model.Database.Delete();
-            //Client nc = new Client(0, "Иван", "Иванов", DateTime.Today, "88005553535");
 
-            //model.Clients.Add(nc);
-            //model.Clients.Add(new Client(0, "Иван2", "Иванов2", DateTime.Today, "880055535352"));
-            //model.Clients.Add(new Client(0, "Иван3", "Иванов3", DateTime.Today, "880055535353"));
+            var services = db.Orders;
 
-            //model.Orders.Add(new Order(0, "18.02.2023", nc, "Замена масла", "Обслуживание авто", "2д0ч0м", 0, 1000, true));
-            //model.SaveChanges();
-            var services = model.Orders;
-            //MessageBox.Show("Успешная запись в базу");
 
             dataGridView1.ItemsSource = services.ToArray();
-            nameInput.ItemsSource = model.Clients.ToArray();
+            nameInput.ItemsSource = db.Clients.ToArray();
 
-            //dataGridView1.ItemsSource= services;
         }
 
 
@@ -124,9 +116,9 @@ namespace wpf_practical
             }
 
             //services.Add(new ServiceArray(0, "18.02.2023", "Иванов Иван Иванович", "Замена масла", "Обслуживание авто", "2д0ч0м", 0, 1000, true));
-            model.Orders.Add(new Order((int)Convert.ToInt16(orderNumber.Value), dateInput.SelectedDate.HasValue? (DateTime)dateInput.SelectedDate : DateTime.Today, nameInput.SelectedItem as Client, serviceInput.Text, serviceTypeInput.Text, timeInput.Text, Convert.ToInt16(discountInput.Text), Convert.ToInt16(costInput.Text), (done.IsChecked.HasValue? (bool)done.IsChecked : false )));
-            model.SaveChanges();
-            dataGridView1.ItemsSource = model.Orders.ToArray();
+            db.Orders.Add(new Order((int)Convert.ToInt16(orderNumber.Value), dateInput.SelectedDate.HasValue? (DateTime)dateInput.SelectedDate : DateTime.Today, nameInput.SelectedItem as Client, serviceInput.Text, serviceTypeInput.Text, timeInput.Text, Convert.ToInt16(discountInput.Text), Convert.ToInt16(costInput.Text), (done.IsChecked.HasValue? (bool)done.IsChecked : false )));
+            db.SaveChanges();
+            dataGridView1.ItemsSource = db.Orders.ToArray();
             statusBar.Show("Запись сохранена", StatusBar.TYPE.OK);
         }
 
@@ -212,7 +204,12 @@ namespace wpf_practical
         private void addClientMenuItem_Click(object sender, RoutedEventArgs e)
         {
             windows.NewClient newClient = new windows.NewClient();
-            newClient.ShowDialog();
+            if (newClient.ShowDialog() == true)
+            {
+                db.Clients.Add(newClient.client);
+                db.SaveChanges();
+            }
+            
         }
 
         private void showClients_Click(object sender, RoutedEventArgs e)

@@ -8,6 +8,7 @@ namespace wpf_practical
 {
     public class StatusBar
     {
+        // Знал бы я про синглтон раньше, этого бы не произошло
         RichTextBox _statusBar;
         public readonly string FileName;
         public StatusBar(RichTextBox richTextBox, string fileName)

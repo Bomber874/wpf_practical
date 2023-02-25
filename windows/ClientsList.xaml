@@ -20,7 +20,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <DockPanel Grid.Row="1">
-            
+            <Button DockPanel.Dock="Top" Click="AddClient">Добавить</Button>
+            <Button DockPanel.Dock="Top" Click="EditClient">Изменить</Button>
+            <Button DockPanel.Dock="Top" Click="DeleteClient">Удалить</Button>
         </DockPanel>
     </Grid>
 </Window>

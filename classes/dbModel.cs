@@ -9,10 +9,13 @@ namespace wpf_practical.classes
 {
     public class dbModel : DbContext
     {
-        public dbModel()
+        private dbModel()
             : base("PracticalConnecntion")
         { }
         private static dbModel _instance;
+        /// <summary>
+        /// Точка доступа для объекта dbModel
+        /// </summary>
         public static dbModel Instance
         {
             get
