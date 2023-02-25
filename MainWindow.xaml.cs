@@ -70,22 +70,18 @@ namespace wpf_practical
             logFileName = $"logs/{DateTime.Now.ToShortDateString().Replace('.', '-')}-{DateTime.Now.ToShortTimeString().Replace(':', '-')}.log";
             statusBar = new StatusBar(statusBarText, logFileName);
             statusBar.Show("Программа запущена", StatusBar.TYPE.OK);
-            model.Database.Delete();
-            Client nc = new Client(0, "Иван", "Иванов", DateTime.Today, "88005553535");
+            //model.Database.Delete();
+            //Client nc = new Client(0, "Иван", "Иванов", DateTime.Today, "88005553535");
 
-            model.Clients.Add(nc);
-            model.Clients.Add(new Client(0, "Иван2", "Иванов2", DateTime.Today, "880055535352"));
-            model.Clients.Add(new Client(0, "Иван3", "Иванов3", DateTime.Today, "880055535353"));
+            //model.Clients.Add(nc);
+            //model.Clients.Add(new Client(0, "Иван2", "Иванов2", DateTime.Today, "880055535352"));
+            //model.Clients.Add(new Client(0, "Иван3", "Иванов3", DateTime.Today, "880055535353"));
 
-            model.Orders.Add(new Order(0, "18.02.2023", nc, "Замена масла", "Обслуживание авто", "2д0ч0м", 0, 1000, true));
-            model.SaveChanges();
+            //model.Orders.Add(new Order(0, "18.02.2023", nc, "Замена масла", "Обслуживание авто", "2д0ч0м", 0, 1000, true));
+            //model.SaveChanges();
             var services = model.Orders;
             //MessageBox.Show("Успешная запись в базу");
-            var orders = model.Orders;
-            foreach (Order s in orders)
-            {
-                MessageBox.Show(s.ToString());
-            }
+
             dataGridView1.ItemsSource = services.ToArray();
             nameInput.ItemsSource = model.Clients.ToArray();
 
@@ -128,7 +124,7 @@ namespace wpf_practical
             }
 
             //services.Add(new ServiceArray(0, "18.02.2023", "Иванов Иван Иванович", "Замена масла", "Обслуживание авто", "2д0ч0м", 0, 1000, true));
-            model.Orders.Add(new Order((int)Convert.ToInt16(orderNumber.Value), dateInput.Text, nameInput.SelectedItem as Client, serviceInput.Text, serviceTypeInput.Text, timeInput.Text, Convert.ToInt16(discountInput.Text), Convert.ToInt16(costInput.Text), (done.IsChecked.HasValue? (bool)done.IsChecked : false )));
+            model.Orders.Add(new Order((int)Convert.ToInt16(orderNumber.Value), dateInput.SelectedDate.HasValue? (DateTime)dateInput.SelectedDate : DateTime.Today, nameInput.SelectedItem as Client, serviceInput.Text, serviceTypeInput.Text, timeInput.Text, Convert.ToInt16(discountInput.Text), Convert.ToInt16(costInput.Text), (done.IsChecked.HasValue? (bool)done.IsChecked : false )));
             model.SaveChanges();
             dataGridView1.ItemsSource = model.Orders.ToArray();
             statusBar.Show("Запись сохранена", StatusBar.TYPE.OK);

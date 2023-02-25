@@ -95,6 +95,7 @@
     <Compile Include="classes\Client.cs" />
     <Compile Include="classes\ClientModel.cs" />
     <Compile Include="classes\CSV.cs" />
+    <Compile Include="classes\DatabaseInitializer.cs" />
     <Compile Include="classes\dbModel.cs" />
     <Compile Include="classes\OrderModel.cs" />
     <Compile Include="classes\Order.cs" />

@@ -12,6 +12,27 @@ namespace wpf_practical.classes
         public dbModel()
             : base("PracticalConnecntion")
         { }
+        private static dbModel _instance;
+        public static dbModel Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new dbModel();
+                }
+                return _instance;
+            }
+        }
+
+        static dbModel()
+        {
+            Database.SetInitializer(new DatabaseInitializer());
+        }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Client> Clients { get; set; }
     }

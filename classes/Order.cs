@@ -11,7 +11,7 @@ namespace wpf_practical
     public class Order
     {
         public Order() { }
-        public Order(int orderId, string date, Client client, string service, string serviceType, string time, int discount, int cost, bool done)
+        public Order(int orderId, DateTime date, Client client, string service, string serviceType, string time, int discount, int cost, bool done)
         {
             this.id = orderId;
             this.date = date;
@@ -25,10 +25,9 @@ namespace wpf_practical
             //MessageBox.Show($"Вызов конструктора для объекта {name}");
         }
         public int id { get; set; }
-        public string date { get; set; }
+        public DateTime date { get; set; }
         public int ClientID { get; set; }
         public virtual Client Client { get; set; }
-        public string name { get; set; }
         public string service { get; set; }
         public string serviceType { get; set; }
         public string time { get; set; }
