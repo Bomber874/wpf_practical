@@ -95,8 +95,12 @@
     <Compile Include="classes\Client.cs" />
     <Compile Include="classes\ClientModel.cs" />
     <Compile Include="classes\CSV.cs" />
+    <Compile Include="classes\dbModel.cs" />
     <Compile Include="classes\OrderModel.cs" />
     <Compile Include="classes\Order.cs" />
+    <Compile Include="windows\ClientsList.xaml.cs">
+      <DependentUpon>ClientsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\NewClient.xaml.cs">
       <DependentUpon>NewClient.xaml</DependentUpon>
     </Compile>
@@ -119,6 +123,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="windows\ClientsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windows\NewClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

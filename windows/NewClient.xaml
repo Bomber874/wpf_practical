@@ -20,21 +20,21 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Имя:</Label>
-            <TextBox DockPanel.Dock="Top"></TextBox>
+            <TextBox DockPanel.Dock="Top" x:Name="firstName" Text="{Binding firstname}"></TextBox>
         </DockPanel>
         <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Фамилия:</Label>
-            <TextBox DockPanel.Dock="Top"></TextBox>
+            <TextBox DockPanel.Dock="Top" x:Name="lastName" Text="{Binding lastname}"></TextBox>
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Дата рождения:</Label>
-            <TextBox DockPanel.Dock="Top"></TextBox>
+            <TextBox DockPanel.Dock="Top" x:Name="birthDay" Text="{Binding birthday}"></TextBox>
         </DockPanel>
         <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Номер телефона:</Label>
-            <TextBox DockPanel.Dock="Top"></TextBox>
+            <TextBox DockPanel.Dock="Top" x:Name="phoneNumber" Text="{Binding phonenumber}"></TextBox>
         </DockPanel>
-        <Button Grid.Row="4" Grid.Column="0">Сохранить</Button>
-        <Button Grid.Row="4" Grid.Column="1">Отмена</Button>
+        <Button Grid.Row="4" Grid.Column="0" x:Name="saveButton" Click="saveButton_Click">Сохранить</Button>
+        <Button Grid.Row="4" Grid.Column="1" x:Name="cancelButton" Click="cancelButton_Click">Отмена</Button>
     </Grid>
 </Window>

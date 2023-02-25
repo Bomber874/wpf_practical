@@ -22,5 +22,15 @@ namespace wpf_practical
         public string lastname { get; set; }
         public DateTime birthday { get; set; }
         public string phonenumber { get; set; }
+        public string FName
+        {
+            get { return this.FullName(); }
+        }
+
+        public string FullName()
+        {
+            return $"{this.firstname} {this.lastname}";
     }
+    }
+    
 }

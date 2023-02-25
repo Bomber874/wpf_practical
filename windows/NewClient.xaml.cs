@@ -19,9 +19,23 @@ namespace wpf_practical.windows
     /// </summary>
     public partial class NewClient : Window
     {
+        public Client client { get; set; }
         public NewClient()
         {
             InitializeComponent();
+            client = new Client();
+            DataContext = client;
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(client.firstname, client.id.ToString());
+            //Close();
         }
     }
 }

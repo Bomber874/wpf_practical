@@ -36,7 +36,7 @@
             <Menu>
                 <MenuItem Header="Клиенты">
                     <MenuItem Header="Добавить клиента" x:Name="addClientMenuItem" Click="addClientMenuItem_Click"/>
-                    <MenuItem Header="Список клиентов"/>
+                    <MenuItem Header="Список клиентов" x:Name="showClients" Click="showClients_Click"/>
                 </MenuItem>
             </Menu>
         </ToolBar>
@@ -50,8 +50,8 @@
                 <DatePicker x:Name="dateInput"  Height="30" LostFocus="dateInput_LostFocus"></DatePicker>
             </StackPanel>
             <StackPanel MinWidth="160">
-                <Label>ФИО/Название</Label>
-                <TextBox x:Name="nameInput" Height="30" LostFocus="nameInput_LostFocus"></TextBox>
+                <Label>Клиент</Label>
+                <ComboBox x:Name="nameInput" Height="30" LostFocus="nameInput_LostFocus" SelectedItem="{Binding FName}" DisplayMemberPath="FName"></ComboBox>
             </StackPanel>
             <StackPanel MinWidth="160">
                 <Label>Наименование услуги</Label>
@@ -81,11 +81,11 @@
             </StackPanel>
         </WrapPanel>
         <Button x:Name="saveButton" Click="saveButton_Click" Grid.Row="2">Сохранить в список</Button>
-        <DataGrid x:Name="dataGridView1" Grid.Row="3" AutoGenerateColumns="False" ItemsSource="{Binding}">
+        <DataGrid x:Name="dataGridView1" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер заказа"  Binding="{Binding id}"/>
                 <DataGridTextColumn Header="Дата заказа" Binding="{Binding date}"/>
-                <DataGridTextColumn Header="ФИО/Название" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Клиент" Binding="{Binding Client.FName}"/>
                 <DataGridTextColumn Header="Наименование" Binding="{Binding service}"/>
                 <DataGridTextColumn Header="Вид услуги" Binding="{Binding serviceType}"/>
                 <DataGridTextColumn Header="Объём услуги" Binding="{Binding time}"/>

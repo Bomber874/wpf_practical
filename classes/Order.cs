@@ -11,11 +11,11 @@ namespace wpf_practical
     public class Order
     {
         public Order() { }
-        public Order(int orderId, string date, string name, string service, string serviceType, string time, int discount, int cost, bool done)
+        public Order(int orderId, string date, Client client, string service, string serviceType, string time, int discount, int cost, bool done)
         {
             this.id = orderId;
             this.date = date;
-            this.name = name;
+            this.Client = client;
             this.service = service;
             this.serviceType = serviceType;
             this.time = time;
@@ -26,6 +26,8 @@ namespace wpf_practical
         }
         public int id { get; set; }
         public string date { get; set; }
+        public int ClientID { get; set; }
+        public virtual Client Client { get; set; }
         public string name { get; set; }
         public string service { get; set; }
         public string serviceType { get; set; }
@@ -36,7 +38,7 @@ namespace wpf_practical
 
         public override string ToString()
         {
-            return $"Id: {this.id}\nНазвание: {this.name}\nДата: {this.date}\nУслуга: {this.service}\nТип услуги: {this.serviceType}\nВремя: {this.time}\nСкидка: {this.discount}\nСтоимость: {this.cost}\nОказана: {this.done}\n";
+            return $"Id: {this.id}\nКлиент: {this.Client.FullName()}\nДата: {this.date}\nУслуга: {this.service}\nТип услуги: {this.serviceType}\nВремя: {this.time}\nСкидка: {this.discount}\nСтоимость: {this.cost}\nОказана: {this.done}\n";
         }
     }
 }
