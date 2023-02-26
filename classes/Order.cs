@@ -39,5 +39,9 @@ namespace wpf_practical
         {
             return $"Id: {this.id}\nКлиент: {this.Client.FullName()}\nДата: {this.date}\nУслуга: {this.service}\nТип услуги: {this.serviceType}\nВремя: {this.time}\nСкидка: {this.discount}\nСтоимость: {this.cost}\nОказана: {this.done}\n";
         }
+        // Если столбцы будут не в своих изначальных местах, выгрузка в файл будет некорректна
+        public string[] ToArray() {
+            return new string[] { id.ToString(), date.ToString(), ClientID.ToString(), service, serviceType, time, discount.ToString(), cost.ToString(), done.ToString() };
+        }
     }
 }

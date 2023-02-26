@@ -56,7 +56,7 @@ namespace wpf_practical
         void saveRequest()
         {
             SaveDialogue saveDialogue = new SaveDialogue();
-            saveDialogue.ShowDialog(); // saveForm.Show(); Не подойдет, т.к. тогда выполнение кода продолжится
+            saveDialogue.ShowDialog();
             if (saveDialogue.SaveFile)
             {
                 if (CSV.Save(saveDialogue.FileName, dataGridView1))

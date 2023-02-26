@@ -33,9 +33,9 @@ namespace wpf_practical
                 MessageBox.Show($"Некорректное название файла\nВы ввели:{fileNameInput.Text}");
                 return;
             }
-            if (!fileNameInput.Text.EndsWith(".txt"))
+            if (!fileNameInput.Text.EndsWith(".csv"))
             {
-                fileNameInput.Text = fileNameInput.Text + ".txt";
+                fileNameInput.Text = fileNameInput.Text + ".csv";
             }
             FileName = fileNameInput.Text;
             SaveFile = true;

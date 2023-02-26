@@ -17,54 +17,32 @@ namespace wpf_practical
         /// <returns></returns>
         static public bool Save(string filename, DataGrid dataGridView)
         {
+            StreamWriter streamWriter = new StreamWriter(filename, false, Encoding.UTF8);
             try
             {
-                StringBuilder strBuilder = new StringBuilder();
-
-                for (int i = 0; i < dataGridView.Items.Count; i++)
+                foreach(DataGridColumn column in dataGridView.Columns)
                 {
-                    Order prsn = (Order)dataGridView.Items[i];
-                    strBuilder.Append(prsn.ToString());
+                    streamWriter.Write((column.Header != null ? column.Header : "null") + ";");
                 }
-                File.WriteAllText(filename, strBuilder.ToString());
+                streamWriter.Write(Environment.NewLine);
+                foreach(Order order in dataGridView.Items)
+                {
+                    foreach(string info in order.ToArray())
+                    {
+                        streamWriter.Write(info+';');
+                    }
+                    streamWriter.Write(Environment.NewLine);
+                }
+                streamWriter.Close();
+                streamWriter.Dispose();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                streamWriter.Close();
+                streamWriter.Dispose();
                 return false;
             }
-            
-            // Искал информацию о том, как обойти все ячейки в DataGrid, видать не нашёл
-
-            //StreamWriter streamWriter = new StreamWriter(filename, false, Encoding.UTF8);
-            //try
-            //{
-            //    for (int i = 0; i < dataGridView.Columns.Count; i++)
-            //    {
-            //        streamWriter.Write(dataGridView.Columns[i].Header + (i == dataGridView.Columns.Count - 1 ? "" : ";"));
-            //    }
-            //    streamWriter.Write(Environment.NewLine);
-
-                
-
-            //    for (int i = 0; i < dataGridView.Rows.Count; i++)
-            //    {
-            //        for (int j = 0; j < dataGridView.Rows[i].Cells.Count; j++)
-            //        {
-            //            streamWriter.Write(dataGridView.Rows[i].Cells[j].Value + (j == dataGridView.Rows[i].Cells.Count - 1 ? "" : ";"));
-            //        }
-            //        streamWriter.Write(Environment.NewLine);
-            //    }
-            //    streamWriter.Close();
-            //    streamWriter.Dispose();
-            //    return true;
-            //}
-            //catch (Exception ex)
-            //{
-            //    streamWriter.Close();
-            //    streamWriter.Dispose();
-            //    return false;
-            //}
         }
     }
 }
