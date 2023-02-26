@@ -30,7 +30,11 @@ namespace wpf_practical
         public string FullName()
         {
             return $"{this.firstname} {this.lastname}";
-    }
+        }
+        public override string ToString()
+        {
+            return $"id:{id} Имя:{firstname} Фамилия:{lastname} Дата Рождения:{birthday} Номер телефона:{phonenumber}";
+        }
     }
     
 }

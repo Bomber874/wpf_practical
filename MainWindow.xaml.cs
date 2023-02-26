@@ -30,7 +30,7 @@ namespace wpf_practical
         bool AllowEdit = false;
         void Notify(string message, StatusBar.TYPE type)
         {
-            statusBar.Show(message, type);
+            statusBar.Log(message, type);
             SystemSounds.Beep.Play();
             MessageBox.Show(message);
         }
@@ -60,17 +60,18 @@ namespace wpf_practical
             if (saveDialogue.SaveFile)
             {
                 if (CSV.Save(saveDialogue.FileName, dataGridView1))
-                    statusBar.Show($"Успешная выгрузка в файл:{saveDialogue.FileName}", StatusBar.TYPE.OK);
+                    statusBar.Log($"Успешная выгрузка в файл:{saveDialogue.FileName}", StatusBar.TYPE.OK);
                 else
-                    statusBar.Show($"Ошибка при выгрузке файла{saveDialogue.FileName}", StatusBar.TYPE.ERROR);
+                    statusBar.Log($"Ошибка при выгрузке файла{saveDialogue.FileName}", StatusBar.TYPE.ERROR);
             }
         }
         public MainWindow()
         {
             InitializeComponent();
             logFileName = $"logs/{DateTime.Now.ToShortDateString().Replace('.', '-')}-{DateTime.Now.ToShortTimeString().Replace(':', '-')}.log";
-            statusBar = new StatusBar(statusBarText, logFileName);
-            statusBar.Show("Программа запущена", StatusBar.TYPE.OK);
+            StatusBar.GenerateObject(statusBarText, logFileName);
+            statusBar = StatusBar.Instance;
+            statusBar.Log("Программа запущена", StatusBar.TYPE.OK);
 
             var services = db.Orders;
 
@@ -119,12 +120,12 @@ namespace wpf_practical
             db.Orders.Add(new Order((int)Convert.ToInt16(orderNumber.Value), dateInput.SelectedDate.HasValue? (DateTime)dateInput.SelectedDate : DateTime.Today, nameInput.SelectedItem as Client, serviceInput.Text, serviceTypeInput.Text, timeInput.Text, Convert.ToInt16(discountInput.Text), Convert.ToInt16(costInput.Text), (done.IsChecked.HasValue? (bool)done.IsChecked : false )));
             db.SaveChanges();
             dataGridView1.ItemsSource = db.Orders.ToArray();
-            statusBar.Show("Запись сохранена", StatusBar.TYPE.OK);
+            statusBar.Log("Запись сохранена", StatusBar.TYPE.OK);
         }
 
         private void Window_Closed(object sender, EventArgs e) // Как бы выцепить причину закрытия (userexit/crash)
         {
-            statusBar.Show("Завершение работы, причина: Да черт его знает, скорее всего выход из приложения", StatusBar.TYPE.SHUTDOWN);
+            statusBar.Log("Завершение работы, причина: Да черт его знает, скорее всего выход из приложения", StatusBar.TYPE.SHUTDOWN);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -140,42 +141,42 @@ namespace wpf_practical
 
         private void orderNumber_LostFocus(object sender, RoutedEventArgs e)
         {
-            statusBar.Show("№Заказа:" + orderNumber.Value, StatusBar.TYPE.INFO);
+            statusBar.Log("№Заказа:" + orderNumber.Value, StatusBar.TYPE.INFO);
         }
 
         private void dateInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            statusBar.Show("Дата:" + dateInput.Text, StatusBar.TYPE.INFO);
+            statusBar.Log("Дата:" + dateInput.Text, StatusBar.TYPE.INFO);
         }
 
         private void nameInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            statusBar.Show("Название/ФИО:" + nameInput.Text, StatusBar.TYPE.INFO);
+            statusBar.Log("Название/ФИО:" + nameInput.Text, StatusBar.TYPE.INFO);
         }
 
         private void serviceInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            statusBar.Show("Услуга:" + serviceInput.Text, StatusBar.TYPE.INFO);
+            statusBar.Log("Услуга:" + serviceInput.Text, StatusBar.TYPE.INFO);
         }
 
         private void serviceTypeInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            statusBar.Show("Вид услуги:" + serviceTypeInput.Text, StatusBar.TYPE.INFO);
+            statusBar.Log("Вид услуги:" + serviceTypeInput.Text, StatusBar.TYPE.INFO);
         }
 
         private void discountInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            statusBar.Show("Скидка:" + discountInput.Text, StatusBar.TYPE.INFO);
+            statusBar.Log("Скидка:" + discountInput.Text, StatusBar.TYPE.INFO);
         }
 
         private void costInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            statusBar.Show("Стоимость услуги:" + costInput.Text, StatusBar.TYPE.INFO);
+            statusBar.Log("Стоимость услуги:" + costInput.Text, StatusBar.TYPE.INFO);
         }
 
         private void done_Checked(object sender, RoutedEventArgs e)
         {
-            statusBar.Show(Convert.ToBoolean(done.IsChecked)? "Услуга выполнена" : "Услуга не выполнена", StatusBar.TYPE.INFO);
+            statusBar.Log(Convert.ToBoolean(done.IsChecked)? "Услуга выполнена" : "Услуга не выполнена", StatusBar.TYPE.INFO);
         }
 
         private void timeInput_LostFocus(object sender, RoutedEventArgs e)
@@ -183,7 +184,7 @@ namespace wpf_practical
             // Чтобы сработало, пришлось в маске отказаться от пробелов, в качестве разделителей
             // Также, оказалось, что timeInput.Text возвращает timeInput.Text.Trim(), поэтому в конец маски добавил \.
             timeInput.Text = timeInput.Text.Replace(' ', '0');
-            statusBar.Show("Объём услуги:" + timeInput.Text, StatusBar.TYPE.INFO);
+            statusBar.Log("Объём услуги:" + timeInput.Text, StatusBar.TYPE.INFO);
         }
 
         private void saveMenuItem_Selected(object sender, RoutedEventArgs e)
@@ -193,7 +194,8 @@ namespace wpf_practical
 
         private void openLog_Click(object sender, RoutedEventArgs e)
         {
-            var log = ReadText(logFileName); if (log == null)
+            var log = ReadText(logFileName);
+            if (log == null)
             {
                 return;
             }
@@ -208,6 +210,7 @@ namespace wpf_practical
             {
                 db.Clients.Add(newClient.client);
                 db.SaveChanges();
+                StatusBar.Instance.Log($"Новый клиент {newClient.client}", StatusBar.TYPE.OK);
             }
             
         }

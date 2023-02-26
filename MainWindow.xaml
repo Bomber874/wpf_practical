@@ -51,7 +51,7 @@
             </StackPanel>
             <StackPanel MinWidth="160">
                 <Label>Клиент</Label>
-                <ComboBox x:Name="nameInput" Height="30" LostFocus="nameInput_LostFocus" SelectedItem="{Binding FName}" DisplayMemberPath="FName"></ComboBox>
+                <ComboBox x:Name="nameInput" Height="30" LostFocus="nameInput_LostFocus" DisplayMemberPath="FName"></ComboBox>
             </StackPanel>
             <StackPanel MinWidth="160">
                 <Label>Наименование услуги</Label>

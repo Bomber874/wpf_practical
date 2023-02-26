@@ -11,11 +11,31 @@ namespace wpf_practical
         // Знал бы я про синглтон раньше, этого бы не произошло
         RichTextBox _statusBar;
         public readonly string FileName;
-        public StatusBar(RichTextBox richTextBox, string fileName)
+        private static StatusBar _instance;
+        StatusBar(RichTextBox richTextBox, string fileName)
         {
             _statusBar = richTextBox;
             Directory.CreateDirectory("logs");
             FileName = fileName;
+        }
+        /// <summary>
+        /// Точка доступа к объекту StatusBar
+        /// Перед использованием, объект должен быть создан, методом StatusBar.GenerateObject
+        /// </summary>
+        public static StatusBar Instance {
+            get
+            {
+                return _instance;
+            }
+        }
+        /// <summary>
+        /// Создаёт объект StatusBar, для дайнейшего доступа через StatusBar.Instance
+        /// </summary>
+        /// <param name="richTextBox">RichTextBox, в который будет выводиться последнее действие</param>
+        /// <param name="fileName">Путь на файла логов</param>
+        public static void GenerateObject(RichTextBox richTextBox, string fileName)
+        {
+            _instance = new StatusBar(richTextBox, fileName);
         }
         public enum TYPE
         {
@@ -24,7 +44,7 @@ namespace wpf_practical
             INFO,
             SHUTDOWN
         }
-        public void WriteLog(string message)
+        private void WriteLogToFile(string message)
         {
             //File.AppendAllLines(FileName, new string[] { message });
             StreamWriter sw = File.AppendText(FileName);
@@ -32,8 +52,12 @@ namespace wpf_practical
             sw.Close();
             sw.Dispose();
         }
-
-        public void Show(string message, TYPE type)
+        /// <summary>
+        /// Сохраняет в строку состояния и лог-файл сообщение
+        /// </summary>
+        /// <param name="message">Сообщение для сохранения в лог</param>
+        /// <param name="type">StatusBar.TYPE</param>
+        public void Log(string message, TYPE type)
         {
             if (message.Trim() == "")
                 return;
@@ -68,7 +92,7 @@ namespace wpf_practical
             doc.Text = ToShow;
             _statusBar.SelectAll();
             _statusBar.SelectionBrush = new SolidColorBrush(color);
-            WriteLog(ToShow);
+            WriteLogToFile(ToShow);
         }
     }
 }

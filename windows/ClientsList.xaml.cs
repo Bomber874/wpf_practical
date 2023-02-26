@@ -37,6 +37,7 @@ namespace wpf_practical.windows
                 model.Clients.Add(ncWindow.client);
                 model.SaveChanges();
                 dgClients.ItemsSource = model.Clients.ToArray();
+                StatusBar.Instance.Log($"Новый клиент {ncWindow.client}", StatusBar.TYPE.OK);
             }
         }
 
@@ -48,6 +49,7 @@ namespace wpf_practical.windows
                 return;
             }
             Client client = dgClients.SelectedItem as Client;
+            StatusBar.Instance.Log($"Начато редактирование клиента {client}", StatusBar.TYPE.OK);
             var ncWindow = new NewClient(client);
             if (ncWindow.ShowDialog() == true)
             {
@@ -58,6 +60,7 @@ namespace wpf_practical.windows
                 //oldClient.phonenumber = client.phonenumber;
                 if (model.Entry(client).State == System.Data.Entity.EntityState.Modified)
                 {
+                    StatusBar.Instance.Log($"Успешное редактирование {client}", StatusBar.TYPE.OK);
                     model.SaveChanges();
                     //dgClients.ItemsSource = model.Clients.ToArray();
                 }
@@ -65,6 +68,7 @@ namespace wpf_practical.windows
             else
             {
                 model.Entry(client).Reload();
+                StatusBar.Instance.Log($"Отмена редактирования {client}", StatusBar.TYPE.OK);
                 dgClients.ItemsSource = model.Clients.ToArray();
             }
         }
@@ -77,10 +81,23 @@ namespace wpf_practical.windows
                 return;
             }
             Client client = dgClients.SelectedItem as Client;
+
+            Order order = model.Orders.Where(o => o.ClientID == client.id).FirstOrDefault();
+            if (order != null)
+            {
+                StatusBar.Instance.Log($"Невозможно удалить, имеется заказ {order}", StatusBar.TYPE.ERROR);
+                MessageBox.Show($"Невозможно удалить, т.к. база заказов имеет заказ с выбранным клиентом\nДля удаления клиента, удалите все его заказы\nЗаказ:{order}");
+                return;
+            }
+            
+            
+
+
+
             model.Clients.Remove(client);
             model.SaveChanges();
             dgClients.ItemsSource = model.Clients.ToArray();
-
+            StatusBar.Instance.Log($"Клиент удалён {client}", StatusBar.TYPE.OK);
         }
     }
 }
