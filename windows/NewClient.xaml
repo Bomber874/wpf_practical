@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Регистрация нового клиента" Height="450" Width="800">
 
-    <Grid Validation.Error="TextBoxValidation_Error">
+    <Grid Validation.Error="TextBoxValidation_Error" >
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>

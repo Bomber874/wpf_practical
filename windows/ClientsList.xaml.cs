@@ -71,6 +71,15 @@ namespace wpf_practical.windows
 
         private void DeleteClient(object sender, RoutedEventArgs e)
         {
+            if (dgClients.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите клиента для удаления");
+                return;
+            }
+            Client client = dgClients.SelectedItem as Client;
+            model.Clients.Remove(client);
+            model.SaveChanges();
+            dgClients.ItemsSource = model.Clients.ToArray();
 
         }
     }

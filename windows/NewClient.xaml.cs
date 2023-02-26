@@ -94,14 +94,27 @@ namespace wpf_practical.windows
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (FailedValidation.Count != 0)
+            {
+                MessageBox.Show($"{FailedValidation.First().Value}\nВы ввели:{FailedValidation.First().Key.Text}");
+                return;
+            }
             this.DialogResult = true;
             Close();
         }
-
+        Dictionary<TextBox, string> FailedValidation = new Dictionary<TextBox, string>();
         private void TextBoxValidation_Error(object sender, ValidationErrorEventArgs e)
         {
-
+            // Вызывается дважды. Сначала ValidationErrorEventAction.Added, за тем-что-то другое
+            if (e.Action == ValidationErrorEventAction.Added)
+            {
+                FailedValidation[e.Source as TextBox] = e.Error.ErrorContent.ToString();
+            }
+            else
+                 if (!((BindingExpressionBase)e.Error.BindingInError).HasError) // Копипаста с гитхаба
+            {
+                FailedValidation.Remove(e.Source as TextBox);
+            }
         }
     }
 }
