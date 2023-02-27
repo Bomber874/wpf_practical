@@ -82,7 +82,7 @@ namespace wpf_practical.windows
             }
             Client client = dgClients.SelectedItem as Client;
 
-            Order order = model.Orders.Where(o => o.ClientID == client.id).FirstOrDefault();
+            Order order = model.Orders.Where(o => o.ClientID == client.ID).FirstOrDefault();
             if (order != null)
             {
                 StatusBar.Instance.Log($"Невозможно удалить, имеется заказ {order}", StatusBar.TYPE.ERROR);

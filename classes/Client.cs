@@ -9,19 +9,20 @@ namespace wpf_practical
     public class Client
     {
         public Client() { }
-        public Client(int id, string fn, string ln, DateTime bd, string pnum) {
-            this.id = id;
-            this.firstname = fn;
-            this.lastname = ln;
-            this.birthday = bd;
-            this.phonenumber = pnum;
+        public Client(int iD, string firstName, string lastName, DateTime birthDay, string phoneNumber)
+        {
+            ID = iD;
+            FirstName = firstName;
+            LastName = lastName;
+            BirthDay = birthDay;
+            PhoneNumber = phoneNumber;
         }
 
-        public int id { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public DateTime birthday { get; set; }
-        public string phonenumber { get; set; }
+        public int ID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime BirthDay { get; set; }
+        public string PhoneNumber { get; set; }
         public string FName
         {
             get { return this.FullName(); }
@@ -29,11 +30,11 @@ namespace wpf_practical
 
         public string FullName()
         {
-            return $"{this.firstname} {this.lastname}";
+            return $"{this.FirstName} {this.LastName}";
         }
         public override string ToString()
         {
-            return $"id:{id} Имя:{firstname} Фамилия:{lastname} Дата Рождения:{birthday} Номер телефона:{phonenumber}";
+            return $"id:{ID} Имя:{FirstName} Фамилия:{LastName} Дата Рождения:{BirthDay} Номер телефона:{PhoneNumber}";
         }
     }
     

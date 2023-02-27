@@ -22,22 +22,38 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0">Дата заказа:</Label>
-        <DatePicker Grid.Row="0" Grid.Column="1"></DatePicker>
-        <Label Grid.Row="1">Клиент:</Label>
-        <ComboBox Grid.Row="1" Grid.Column="1"></ComboBox>
-        <Label Grid.Row="2">Наименование услуги:</Label>
-        <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
-        <Label Grid.Row="3">Вид услуги:</Label>
-        <ComboBox Grid.Row="3" Grid.Column="1"></ComboBox>
-        <Label Grid.Row="4">Объём услуги:</Label>
-        <TextBox Grid.Row="4" Grid.Column="1"></TextBox>
-        <Label Grid.Row="5">Скидка:</Label>
-        <TextBox Grid.Row="5" Grid.Column="1"></TextBox>
-        <Label Grid.Row="6">Стоимость услуги:</Label>
-        <TextBox Grid.Row="6" Grid.Column="1"></TextBox>
-        <Label Grid.Row="7">Услуга оказана?:</Label>
-        <CheckBox Grid.Row="7" Grid.Column="1"></CheckBox>
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
+            <Label DockPanel.Dock="Top">Дата заказа:</Label>
+            <DatePicker SelectedDate="{Binding Date}"></DatePicker>
+        </DockPanel>
+        <DockPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <Label DockPanel.Dock="Top">Клиент:</Label>
+            <ComboBox x:Name="ClientsComboBox" SelectedItem="{Binding Client}"></ComboBox>
+        </DockPanel>
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="2">
+            <Label DockPanel.Dock="Top">Наименование услуги:</Label>
+            <TextBox Text="{Binding Service}"></TextBox>
+        </DockPanel>
+        <DockPanel Grid.Row="3" Grid.ColumnSpan="2">
+            <Label DockPanel.Dock="Top">Вид услуги:</Label>
+            <ComboBox></ComboBox>
+        </DockPanel>
+        <DockPanel Grid.Row="4" Grid.ColumnSpan="2">
+            <Label DockPanel.Dock="Top">Объём услуги:</Label>
+            <TextBox></TextBox>
+        </DockPanel>
+        <DockPanel Grid.Row="5" Grid.ColumnSpan="2">
+            <Label DockPanel.Dock="Top">Скидка:</Label>
+            <TextBox></TextBox>
+        </DockPanel>
+        <DockPanel Grid.Row="6" Grid.ColumnSpan="2">
+            <Label DockPanel.Dock="Top">Стоимость услуги:</Label>
+            <TextBox></TextBox>
+        </DockPanel>
+        <DockPanel Grid.Row="7" Grid.ColumnSpan="2">
+            <Label DockPanel.Dock="Top">Услуга оказана?:</Label>
+            <CheckBox></CheckBox>
+        </DockPanel>
         <Button Grid.Row="8">Сохранить</Button>
         <Button Grid.Row="8" Grid.Column="1">Отмена</Button>
     </Grid>

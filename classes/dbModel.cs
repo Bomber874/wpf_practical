@@ -38,5 +38,7 @@ namespace wpf_practical.classes
         }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceCategory> ServiceCategories { get; set; }
     }
 }

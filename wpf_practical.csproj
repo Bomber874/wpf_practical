@@ -99,6 +99,8 @@
     <Compile Include="classes\dbModel.cs" />
     <Compile Include="classes\OrderModel.cs" />
     <Compile Include="classes\Order.cs" />
+    <Compile Include="classes\ServiceCategory.cs" />
+    <Compile Include="classes\Service.cs" />
     <Compile Include="windows\ClientsList.xaml.cs">
       <DependentUpon>ClientsList.xaml</DependentUpon>
     </Compile>
@@ -112,6 +114,9 @@
       <DependentUpon>SaveDialogue.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\StatusBar.cs" />
+    <Compile Include="windows\SelectServiceWindow.xaml.cs">
+      <DependentUpon>SelectServiceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\ViewLogWindow.xaml.cs">
       <DependentUpon>ViewLogWindow.xaml</DependentUpon>
     </Compile>
@@ -140,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\SaveDialogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\SelectServiceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -44,7 +44,7 @@
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Дата рождения:</Label>
-            <DatePicker DockPanel.Dock="Top" x:Name="birthday" SelectedDate="{Binding birthday}" FirstDayOfWeek="Monday"/>
+            <DatePicker DockPanel.Dock="Top" x:Name="birthday" SelectedDate="{Binding BirthDay}" FirstDayOfWeek="Monday"/>
         </DockPanel>
         <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Номер телефона:</Label>

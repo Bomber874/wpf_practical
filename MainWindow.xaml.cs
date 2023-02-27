@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpf_practical.classes;
+using wpf_practical.windows;
 
 namespace wpf_practical
 {
@@ -24,7 +25,7 @@ namespace wpf_practical
     public partial class MainWindow : Window
     {
         dbModel db = dbModel.Instance;
-
+        Service SelectedService;
         StatusBar statusBar;
         public string logFileName = "";
         void Notify(string message, StatusBar.TYPE type)
@@ -71,11 +72,7 @@ namespace wpf_practical
             StatusBar.GenerateObject(statusBarText, logFileName);
             statusBar = StatusBar.Instance;
             statusBar.Log("Программа запущена", StatusBar.TYPE.OK);
-
-            var services = db.Orders;
-
-
-            dataGridView1.ItemsSource = services.ToArray();
+            dataGridView1.ItemsSource = db.Orders.ToArray();
             nameInput.ItemsSource = db.Clients.ToArray();
 
         }
@@ -94,14 +91,9 @@ namespace wpf_practical
                 Notify("Некорректное ФИО/Название", StatusBar.TYPE.ERROR);
                 return;
             }
-            if (!Parser.Name(serviceInput.Text))
+            if (SelectedService == null)
             {
-                Notify("Некорректное название услуги", StatusBar.TYPE.ERROR);
-                return;
-            }
-            if (serviceTypeInput.Text == "")
-            {
-                Notify("Выберите вид услуги из списка", StatusBar.TYPE.ERROR);
+                Notify("Выберите услугу из списка", StatusBar.TYPE.ERROR);
                 return;
             }
             if (!Parser.Time(timeInput.Text))
@@ -109,17 +101,14 @@ namespace wpf_practical
                 Notify("Некорректый объём услуги", StatusBar.TYPE.ERROR);
                 return;
             }
-            if (!Parser.Cost(costInput.Text))
-            {
-                Notify("Некорректая стоимость услуги", StatusBar.TYPE.ERROR);
-                return;
-            }
 
             //services.Add(new ServiceArray(0, "18.02.2023", "Иванов Иван Иванович", "Замена масла", "Обслуживание авто", "2д0ч0м", 0, 1000, true));
-            db.Orders.Add(new Order((int)Convert.ToInt16(orderNumber.Value), dateInput.SelectedDate.HasValue? (DateTime)dateInput.SelectedDate : DateTime.Today, nameInput.SelectedItem as Client, serviceInput.Text, serviceTypeInput.Text, timeInput.Text, Convert.ToInt16(discountInput.Text), Convert.ToInt16(costInput.Text), (done.IsChecked.HasValue? (bool)done.IsChecked : false )));
-            db.SaveChanges();
-            dataGridView1.ItemsSource = db.Orders.ToArray();
-            statusBar.Log("Запись сохранена", StatusBar.TYPE.OK);
+            
+            //db.Orders.Add(new Order((int)Convert.ToInt16(orderNumber.Value), dateInput.SelectedDate.HasValue? (DateTime)dateInput.SelectedDate : DateTime.Today, nameInput.SelectedItem as Client, serviceInput.Text, serviceTypeInput.Text, timeInput.Text, Convert.ToInt16(discountInput.Text), Convert.ToInt16(costInput.Text), (done.IsChecked.HasValue? (bool)done.IsChecked : false )));
+            
+            //db.SaveChanges();
+            //dataGridView1.ItemsSource = db.Orders.ToArray();
+            statusBar.Log("Запись не сохранена, сначала почини что сломал", StatusBar.TYPE.OK);
         }
 
         private void Window_Closed(object sender, EventArgs e) // Как бы выцепить причину закрытия (userexit/crash)
@@ -155,12 +144,8 @@ namespace wpf_practical
 
         private void serviceInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            statusBar.Log("Услуга:" + serviceInput.Text, StatusBar.TYPE.INFO);
-        }
-
-        private void serviceTypeInput_LostFocus(object sender, RoutedEventArgs e)
-        {
-            statusBar.Log("Вид услуги:" + serviceTypeInput.Text, StatusBar.TYPE.INFO);
+            //FIX
+            //statusBar.Log("Услуга:" + serviceInput.Text, StatusBar.TYPE.INFO);
         }
 
         private void discountInput_LostFocus(object sender, RoutedEventArgs e)
@@ -170,7 +155,8 @@ namespace wpf_practical
 
         private void costInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            statusBar.Log("Стоимость услуги:" + costInput.Text, StatusBar.TYPE.INFO);
+            //FIX
+            //statusBar.Log("Стоимость услуги:" + costInput.Text, StatusBar.TYPE.INFO);
         }
 
         private void done_Checked(object sender, RoutedEventArgs e)
@@ -238,6 +224,17 @@ namespace wpf_practical
         private void CM_DeleteSelectedOrder(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void OpenSelectServiceWindow_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new windows.SelectServiceWindow();
+            if (window.ShowDialog() == true)
+            {
+                SelectedService = window.Service;
+                OpenSelectServiceWindow.Content = $"{SelectedService.Name}\nЦена:{SelectedService.Cost}";
+                statusBar.Log("Услуга:" + SelectedService.ToString(), StatusBar.TYPE.INFO);
+            }
         }
     }
 }

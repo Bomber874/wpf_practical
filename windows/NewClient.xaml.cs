@@ -75,14 +75,14 @@ namespace wpf_practical.windows
         {
             InitializeComponent();
             client = new Client();
-            client.birthday = DateTime.Today; // Иначе выводился бы день рождения Иисуса(), нам же этого не нужно, верно?
+            client.BirthDay = DateTime.Today; // Иначе выводился бы день рождения Иисуса(), нам же этого не нужно, верно?
             DataContext = client;
         }
         // Добавил второй конструктор, чтобы не писать ещё одну форму для редактирования сущетсвующего клиента
         public NewClient(Client client)
         {
             InitializeComponent();
-            this.Title = $"Редактирование клиента(id:{client.id} {client.FName})";
+            this.Title = $"Редактирование клиента(id:{client.ID} {client.FName})";
             this.client = client;
             DataContext = this.client;
         }

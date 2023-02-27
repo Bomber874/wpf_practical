@@ -19,9 +19,12 @@ namespace wpf_practical.windows
     /// </summary>
     public partial class EditOrderWindow : Window
     {
+        classes.dbModel db;
         public EditOrderWindow()
         {
             InitializeComponent();
+            db = classes.dbModel.Instance;
+            ClientsComboBox.ItemsSource = db.Clients.ToArray();
         }
     }
 }

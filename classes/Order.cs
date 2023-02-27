@@ -5,43 +5,44 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
+using wpf_practical.classes;
 
 namespace wpf_practical
 {
     public class Order
     {
         public Order() { }
-        public Order(int orderId, DateTime date, Client client, string service, string serviceType, string time, int discount, int cost, bool done)
+
+        public Order(int iD, DateTime date, int clientID, Client client, int serviceID, Service service, string time, int discount, bool done)
         {
-            this.id = orderId;
-            this.date = date;
-            this.Client = client;
-            this.service = service;
-            this.serviceType = serviceType;
-            this.time = time;
-            this.discount = discount;
-            this.cost = cost;
-            this.done = done;
-            //MessageBox.Show($"Вызов конструктора для объекта {name}");
+            ID = iD;
+            Date = date;
+            ClientID = clientID;
+            Client = client;
+            ServiceID = serviceID;
+            Service = service;
+            Time = time;
+            Discount = discount;
+            Done = done;
         }
-        public int id { get; set; }
-        public DateTime date { get; set; }
+
+        public int ID { get; set; }
+        public DateTime Date { get; set; }
         public int ClientID { get; set; }
         public virtual Client Client { get; set; }
-        public string service { get; set; }
-        public string serviceType { get; set; }
-        public string time { get; set; }
-        public int discount { get; set; }
-        public int cost { get; set; }
-        public bool done { get; set; }
+        public int ServiceID { get; set; }
+        public virtual Service Service { get; set; }    //Нужно уточнить, как это работает
+        public string Time { get; set; }
+        public int Discount { get; set; }
+        public bool Done { get; set; }
 
         public override string ToString()
         {
-            return $"Id: {this.id}\nКлиент: {this.Client.FullName()}\nДата: {this.date}\nУслуга: {this.service}\nТип услуги: {this.serviceType}\nВремя: {this.time}\nСкидка: {this.discount}\nСтоимость: {this.cost}\nОказана: {this.done}\n";
+            return $"Id: {this.ID}\nКлиент: {this.Client.FullName()}\nДата: {this.Date}\nУслуга: {this.Service.Name}\nКатегория услуги: {this.Service.ServiceCategory.Name}\nВремя: {this.Time}\nСкидка: {this.Discount}\nСтоимость: {this.Service.Cost}\nОказана: {this.Done}\n";
         }
         // Если столбцы будут не в своих изначальных местах, выгрузка в файл будет некорректна
         public string[] ToArray() {
-            return new string[] { id.ToString(), date.ToString(), ClientID.ToString(), service, serviceType, time, discount.ToString(), cost.ToString(), done.ToString() };
+            return new string[] { ID.ToString(), Date.ToString(), ClientID.ToString(), Service.ID.ToString(), Service.ServiceCategory.Name, Time, Discount.ToString(), Service.Cost.ToString(), Done.ToString() };
         }
     }
 }

@@ -41,57 +41,47 @@
             </Menu>
         </ToolBar>
         <WrapPanel Grid.Row="1" Grid.Column="0">
-            <StackPanel>
-                <Label>№ Заказа</Label>
+            <DockPanel>
+                <Label DockPanel.Dock="Top">№ Заказа</Label>
                 <xctk:IntegerUpDown x:Name="orderNumber" LostFocus="orderNumber_LostFocus"></xctk:IntegerUpDown>
-            </StackPanel>
-            <StackPanel>
-                <Label>Дата заказа</Label>
+            </DockPanel>
+            <DockPanel>
+                <Label DockPanel.Dock="Top">Дата заказа</Label>
                 <DatePicker x:Name="dateInput"  Height="30" LostFocus="dateInput_LostFocus"></DatePicker>
-            </StackPanel>
-            <StackPanel MinWidth="160">
-                <Label>Клиент</Label>
+            </DockPanel>
+            <DockPanel MinWidth="160">
+                <Label DockPanel.Dock="Top">Клиент</Label>
                 <ComboBox x:Name="nameInput" Height="30" LostFocus="nameInput_LostFocus" DisplayMemberPath="FName"></ComboBox>
-            </StackPanel>
-            <StackPanel MinWidth="160">
-                <Label>Наименование услуги</Label>
-                <TextBox x:Name="serviceInput" Height="30" LostFocus="serviceInput_LostFocus"></TextBox>
-            </StackPanel>
-            <StackPanel MinWidth="160">
-                <Label>Вид услуги</Label>
-                <ComboBox x:Name="serviceTypeInput" LostFocus="serviceTypeInput_LostFocus">
-                    <ComboBoxItem>dsa</ComboBoxItem>
-                    <ComboBoxItem>dssddsa</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
-            <StackPanel MinWidth="160">
-                <Label>Объём услуги</Label>
+            </DockPanel>
+            <DockPanel MinWidth="160">
+                <Label x:Name="ServiceLabel" DockPanel.Dock="Top">Услуга</Label>
+                <Button x:Name="OpenSelectServiceWindow" Content="Выбор услуги" Click="OpenSelectServiceWindow_Click"/>
+            </DockPanel>
+            <DockPanel MinWidth="160">
+                <Label DockPanel.Dock="Top">Объём услуги</Label>
                 <xctk:MaskedTextBox x:Name="timeInput" Mask="Дней:00\,Часов:00\,Минут:00\." LostFocus="timeInput_LostFocus"></xctk:MaskedTextBox>
-            </StackPanel>
-            <StackPanel MinWidth="160">
-                <Label>Скидка</Label>
+            </DockPanel>
+            <DockPanel MinWidth="160">
+                <Label DockPanel.Dock="Top">Скидка</Label>
                 <TextBox x:Name="discountInput" LostFocus="discountInput_LostFocus"></TextBox>
-            </StackPanel>
-            <StackPanel MinWidth="160">
-                <Label>Стоимость услуги</Label>
-                <TextBox x:Name="costInput" LostFocus="costInput_LostFocus"></TextBox>
-            </StackPanel>
-            <StackPanel MinWidth="160" Height="22">
-                <CheckBox x:Name="done" Checked="done_Checked">Услуга оказана?</CheckBox>
-            </StackPanel>
+            </DockPanel>
+
+            <DockPanel MinWidth="160" Height="22">
+                <CheckBox DockPanel.Dock="Left" x:Name="done" Checked="done_Checked">Услуга оказана?</CheckBox>
+            </DockPanel>
         </WrapPanel>
         <Button x:Name="saveButton" Click="saveButton_Click" Grid.Row="2">Сохранить в список</Button>
         <DataGrid x:Name="dataGridView1" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding}" CanUserReorderColumns="False" SelectionChanged="dataGridView1_SelectionChanged" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Номер заказа"  Binding="{Binding id}"/>
-                <DataGridTextColumn Header="Дата заказа" Binding="{Binding date}"/>
+                <DataGridTextColumn Header="Номер заказа"  Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Дата заказа" Binding="{Binding Date}"/>
                 <DataGridTextColumn Header="Клиент" Binding="{Binding Client.FName}"/>
-                <DataGridTextColumn Header="Наименование" Binding="{Binding service}"/>
-                <DataGridTextColumn Header="Вид услуги" Binding="{Binding serviceType}"/>
-                <DataGridTextColumn Header="Объём услуги" Binding="{Binding time}"/>
-                <DataGridTextColumn Header="Скидка" Binding="{Binding discount}"/>
-                <DataGridTextColumn Header="Стоимость" Binding="{Binding cost}"/>
-                <DataGridTextColumn Header="Выполнена" Binding="{Binding done}"/>
+                <DataGridTextColumn Header="Услуга" Binding="{Binding Service.Name}"/>
+                <DataGridTextColumn Header="Категория услуги" Binding="{Binding Service.ServiceCategory.Name}"/>
+                <DataGridTextColumn Header="Объём услуги" Binding="{Binding Time}"/>
+                <DataGridTextColumn Header="Скидка" Binding="{Binding Discount}"/>
+                <DataGridTextColumn Header="Стоимость" Binding="{Binding Service.Cost}"/>
+                <DataGridTextColumn Header="Выполнена" Binding="{Binding Done}"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>

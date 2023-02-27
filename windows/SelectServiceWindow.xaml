@@ -1,0 +1,26 @@
+﻿<Window x:Class="wpf_practical.windows.SelectServiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpf_practical.windows"
+        mc:Ignorable="d"
+        Title="SelectServiceWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <!--Без понятия, зачем я сделал 2 стлбца, наверное чтобы теперь прописывать элементам это-->
+        <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" x:Name="SelectedServiceLabel" Grid.ColumnSpan="2">Выберите услугу из раскрывающегося списка ниже:</TextBlock>
+        <TreeView Grid.Row="1" Grid.ColumnSpan="2" x:Name="tvServices" DisplayMemberPath="Name" SelectedItemChanged="tvServices_SelectedItemChanged"></TreeView>
+        <Button Grid.Row="2" Grid.ColumnSpan="2" Click="Button_Click">Выбрать</Button>
+        
+    </Grid>
+</Window>
