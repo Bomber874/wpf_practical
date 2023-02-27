@@ -102,6 +102,9 @@
     <Compile Include="windows\ClientsList.xaml.cs">
       <DependentUpon>ClientsList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\EditOrderWindow.xaml.cs">
+      <DependentUpon>EditOrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\NewClient.xaml.cs">
       <DependentUpon>NewClient.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="windows\ClientsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\EditOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

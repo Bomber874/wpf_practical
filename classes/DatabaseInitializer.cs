@@ -11,13 +11,13 @@ namespace wpf_practical.classes
         {
             var clients = new Client[]
            {
-                new Client(){ firstname = "Пётр", lastname = "Евгеньевич", birthday = DateTime.Today, phonenumber="010203" },
-                new Client(){ firstname = "Алексей", lastname = "Инокеньевич", birthday = DateTime.Today, phonenumber="112233" }
+                new Client(){ firstname = "Пётр", lastname = "Евгеньевич", birthday = DateTime.Today, phonenumber="89547851235" },
+                new Client(){ firstname = "Алексей", lastname = "Инокеньевич", birthday = DateTime.Today, phonenumber="79852165721" }
            };
-            var nc = new Client() { firstname = "Иван", lastname = "Иванов", birthday = DateTime.Today, phonenumber = "123456" };
+            var nc = new Client() { firstname = "Иван", lastname = "Иванов", birthday = DateTime.Today, phonenumber = "+79584625184" };
             var orders = new Order[]
             {
-                new Order(){date = DateTime.Today, Client = nc, cost = 100, time = "10 часов", service = "Помыть авто",
+                new Order(){date = DateTime.Today, Client = nc, cost = 100, time = "Дней:22,Часов:22,Минут:22.", service = "Помыть авто",
                     serviceType = "Обслуживание авто", done = true, discount = 0 }
             };
 

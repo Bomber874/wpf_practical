@@ -81,7 +81,7 @@
             </StackPanel>
         </WrapPanel>
         <Button x:Name="saveButton" Click="saveButton_Click" Grid.Row="2">Сохранить в список</Button>
-        <DataGrid x:Name="dataGridView1" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding}">
+        <DataGrid x:Name="dataGridView1" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding}" CanUserReorderColumns="False" SelectionChanged="dataGridView1_SelectionChanged" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер заказа"  Binding="{Binding id}"/>
                 <DataGridTextColumn Header="Дата заказа" Binding="{Binding date}"/>
@@ -93,6 +93,12 @@
                 <DataGridTextColumn Header="Стоимость" Binding="{Binding cost}"/>
                 <DataGridTextColumn Header="Выполнена" Binding="{Binding done}"/>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Изменить" Click="CM_EditSelectedOrder"/>
+                    <MenuItem Header="Удалить" Click="CM_DeleteSelectedOrder"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
         <Button x:Name="exportToFileButton" Click="exportToFileButton_Click" Grid.Row="4">Выгрузить таблицу в файл</Button>
         <RichTextBox x:Name="statusBarText" Grid.Row="5"></RichTextBox>

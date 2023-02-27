@@ -27,7 +27,6 @@ namespace wpf_practical
 
         StatusBar statusBar;
         public string logFileName = "";
-        bool AllowEdit = false;
         void Notify(string message, StatusBar.TYPE type)
         {
             statusBar.Log(message, type);
@@ -219,6 +218,26 @@ namespace wpf_practical
         {
             windows.ClientsList clientsList= new windows.ClientsList();
             clientsList.ShowDialog();
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //MessageBox.Show(e.AddedItems[0].ToString());
+        }
+        private void CM_EditSelectedOrder(object sender, RoutedEventArgs e)
+        {
+            Order selectedOrder = dataGridView1.SelectedItem as Order;
+            if (selectedOrder == null)
+            {
+                MessageBox.Show("Сначала выберите заказ для редактирования");
+                return;
+            }
+            MessageBox.Show(dataGridView1.SelectedItem.ToString());
+        }
+
+        private void CM_DeleteSelectedOrder(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
