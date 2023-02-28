@@ -255,5 +255,24 @@ namespace wpf_practical
                 statusBar.Log("Услуга:" + SelectedService.ToString(), StatusBar.TYPE.INFO);
             }
         }
+
+        private void AddServiceCategoryMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var menu = new NewServiceCategoryWindow();
+            if (menu.ShowDialog() == true)
+            {
+                db.ServiceCategories.Add(menu.Category);
+                db.SaveChanges();
+            }
+        }
+
+        private void CategoryListMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var menu = new ServiceCategoriesList();
+            if (menu.ShowDialog() == true)
+            {
+            
+            }
+        }
     }
 }

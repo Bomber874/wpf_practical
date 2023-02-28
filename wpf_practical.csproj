@@ -110,12 +110,18 @@
     <Compile Include="windows\NewClient.xaml.cs">
       <DependentUpon>NewClient.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\NewServiceCategoryWindow.xaml.cs">
+      <DependentUpon>NewServiceCategoryWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\SaveDialogue.xaml.cs">
       <DependentUpon>SaveDialogue.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\StatusBar.cs" />
     <Compile Include="windows\SelectServiceWindow.xaml.cs">
       <DependentUpon>SelectServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\ServiceCategoriesList.xaml.cs">
+      <DependentUpon>ServiceCategoriesList.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\ViewLogWindow.xaml.cs">
       <DependentUpon>ViewLogWindow.xaml</DependentUpon>
@@ -144,11 +150,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="windows\NewServiceCategoryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windows\SaveDialogue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\SelectServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ServiceCategoriesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

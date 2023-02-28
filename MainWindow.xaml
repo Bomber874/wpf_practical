@@ -28,9 +28,15 @@
 
             <Button x:Name="openLog" Click="openLog_Click">Открыть лог</Button>
             <Menu>
-                <MenuItem Header="Редактирование">
-                    <MenuItem Header="Разрешить редактирование"/>
-                    <MenuItem Header="Запретить"/>
+                <MenuItem Header="Услуги и категории">
+                    <MenuItem Header="Услуги">
+                        <MenuItem Header="Добавить"/>
+                        <MenuItem Header="Список услуг"/>
+                    </MenuItem>
+                    <MenuItem Header="Категории">
+                        <MenuItem Click="AddServiceCategoryMenuItem_Click" Header="Добавить"/>
+                        <MenuItem Click="CategoryListMenuItem_Click" Header="Список категорий"/>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
             <Menu>
