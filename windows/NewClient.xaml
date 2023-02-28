@@ -23,7 +23,7 @@
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Имя:</Label>
             <TextBox DockPanel.Dock="Top" x:Name="firstName">
-                <Binding Path="firstname" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="FirstName" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <ExceptionValidationRule></ExceptionValidationRule>
                         <local:NameVRule/>
@@ -34,7 +34,7 @@
         <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Фамилия:</Label>
             <TextBox DockPanel.Dock="Top" x:Name="lastName">
-                <Binding Path="lastname" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="LastName" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <ExceptionValidationRule></ExceptionValidationRule>
                         <local:NameVRule/>
@@ -49,7 +49,7 @@
         <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="20" FontFamily="Microsoft Sans Serif" FontWeight="Bold" DockPanel.Dock="Top">Номер телефона:</Label>
             <TextBox DockPanel.Dock="Top" x:Name="phoneNumber">
-                <Binding Path="phonenumber" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="PhoneNumber" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <ExceptionValidationRule/>
                         <local:PhoneVRule/>

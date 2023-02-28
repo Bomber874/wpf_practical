@@ -40,6 +40,10 @@ namespace wpf_practical
         {
             return $"Id: {this.ID}\nКлиент: {this.Client.FullName()}\nДата: {this.Date}\nУслуга: {this.Service.Name}\nКатегория услуги: {this.Service.ServiceCategory.Name}\nВремя: {this.Time}\nСкидка: {this.Discount}\nСтоимость: {this.Service.Cost}\nОказана: {this.Done}\n";
         }
+        public string ToSingleString()
+        {
+            return $"Id: {this.ID} Клиент: {this.Client.FullName()} Дата: {this.Date} Услуга: {this.Service.Name} Категория услуги: {this.Service.ServiceCategory.Name} Время: {this.Time} Скидка: {this.Discount} Стоимость: {this.Service.Cost} Оказана: {this.Done}";
+        }
         // Если столбцы будут не в своих изначальных местах, выгрузка в файл будет некорректна
         public string[] ToArray() {
             return new string[] { ID.ToString(), Date.ToString(), ClientID.ToString(), Service.ID.ToString(), Service.ServiceCategory.Name, Time, Discount.ToString(), Service.Cost.ToString(), Done.ToString() };

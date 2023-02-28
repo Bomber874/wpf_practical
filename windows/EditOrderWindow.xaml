@@ -19,8 +19,6 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
             <Label DockPanel.Dock="Top">Дата заказа:</Label>
@@ -28,33 +26,25 @@
         </DockPanel>
         <DockPanel Grid.Row="1" Grid.ColumnSpan="2">
             <Label DockPanel.Dock="Top">Клиент:</Label>
-            <ComboBox x:Name="ClientsComboBox" SelectedItem="{Binding Client}"></ComboBox>
+            <ComboBox x:Name="ClientsComboBox" ItemsSource="{Binding Clients}" SelectedItem="{Binding Client}"></ComboBox>
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.ColumnSpan="2">
-            <Label DockPanel.Dock="Top">Наименование услуги:</Label>
-            <TextBox Text="{Binding Service}"></TextBox>
+            <Label x:Name="ServiceLabel" DockPanel.Dock="Top">Вид услуги:</Label>
+            <Button x:Name="SelectServiceMenu" Click="SelectServiceMenu_Click"></Button>
         </DockPanel>
         <DockPanel Grid.Row="3" Grid.ColumnSpan="2">
-            <Label DockPanel.Dock="Top">Вид услуги:</Label>
-            <ComboBox></ComboBox>
+            <Label DockPanel.Dock="Top">Объём услуги:</Label>
+            <TextBox Text="{Binding Time}"></TextBox>
         </DockPanel>
         <DockPanel Grid.Row="4" Grid.ColumnSpan="2">
-            <Label DockPanel.Dock="Top">Объём услуги:</Label>
-            <TextBox></TextBox>
+            <Label DockPanel.Dock="Top">Скидка:</Label>
+            <TextBox Text="{Binding Discount}"></TextBox>
         </DockPanel>
         <DockPanel Grid.Row="5" Grid.ColumnSpan="2">
-            <Label DockPanel.Dock="Top">Скидка:</Label>
-            <TextBox></TextBox>
-        </DockPanel>
-        <DockPanel Grid.Row="6" Grid.ColumnSpan="2">
-            <Label DockPanel.Dock="Top">Стоимость услуги:</Label>
-            <TextBox></TextBox>
-        </DockPanel>
-        <DockPanel Grid.Row="7" Grid.ColumnSpan="2">
             <Label DockPanel.Dock="Top">Услуга оказана?:</Label>
-            <CheckBox></CheckBox>
+            <CheckBox IsChecked="{Binding Done}"></CheckBox>
         </DockPanel>
-        <Button Grid.Row="8">Сохранить</Button>
-        <Button Grid.Row="8" Grid.Column="1">Отмена</Button>
+        <Button Grid.Row="6" Click="SaveButton_Click">Сохранить</Button>
+        <Button Grid.Row="6" Click="CancelButton_Click" Grid.Column="1">Отмена</Button>
     </Grid>
 </Window>

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using wpf_practical.classes;
 
 namespace wpf_practical.windows
 {
@@ -20,11 +21,38 @@ namespace wpf_practical.windows
     public partial class EditOrderWindow : Window
     {
         classes.dbModel db;
-        public EditOrderWindow()
+        public Service Service;
+        Order EditingOrder;
+        Client[] Clients;
+        public EditOrderWindow(Order editingOrder)
         {
             InitializeComponent();
+            this.EditingOrder = editingOrder;
             db = classes.dbModel.Instance;
+            Clients = db.Clients.ToArray();
             ClientsComboBox.ItemsSource = db.Clients.ToArray();
+            DataContext = EditingOrder;
+        }
+
+        private void SelectServiceMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var menu = new SelectServiceWindow();
+            if (menu.ShowDialog() == true)
+            {
+                Service = menu.Service;
+                ServiceLabel.Content = Service.ToString();
+            }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            Close();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

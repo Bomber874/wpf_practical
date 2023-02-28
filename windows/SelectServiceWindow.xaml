@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <!--Без понятия, зачем я сделал 2 стлбца, наверное чтобы теперь прописывать элементам это-->
         <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" x:Name="SelectedServiceLabel" Grid.ColumnSpan="2">Выберите услугу из раскрывающегося списка ниже:</TextBlock>
-        <TreeView Grid.Row="1" Grid.ColumnSpan="2" x:Name="tvServices" DisplayMemberPath="Name" SelectedItemChanged="tvServices_SelectedItemChanged"></TreeView>
+        <TreeView Grid.Row="1" Grid.ColumnSpan="2" x:Name="tvServices" SelectedItemChanged="tvServices_SelectedItemChanged"></TreeView>
         <Button Grid.Row="2" Grid.ColumnSpan="2" Click="Button_Click">Выбрать</Button>
         
     </Grid>

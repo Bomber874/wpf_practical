@@ -81,7 +81,7 @@
                 <DataGridTextColumn Header="Объём услуги" Binding="{Binding Time}"/>
                 <DataGridTextColumn Header="Скидка" Binding="{Binding Discount}"/>
                 <DataGridTextColumn Header="Стоимость" Binding="{Binding Service.Cost}"/>
-                <DataGridTextColumn Header="Выполнена" Binding="{Binding Done}"/>
+                <DataGridCheckBoxColumn Header="Выполнена" Binding="{Binding Done}"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>

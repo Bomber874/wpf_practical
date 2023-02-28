@@ -218,6 +218,25 @@ namespace wpf_practical
                 MessageBox.Show("Сначала выберите заказ для редактирования");
                 return;
             }
+            StatusBar.Instance.Log("Начато редактирование заказа:" + selectedOrder.ToSingleString(), StatusBar.TYPE.INFO);
+            var menu = new EditOrderWindow(selectedOrder);
+            if (menu.ShowDialog() == true)
+            {
+                if (db.Entry(selectedOrder).State == System.Data.Entity.EntityState.Modified | selectedOrder.Service != menu.Service)
+                {
+                    selectedOrder.Service = menu.Service == null ? selectedOrder.Service : menu.Service;
+                    db.SaveChanges();
+                    StatusBar.Instance.Log("Новые данные заказа:"+selectedOrder.ToSingleString(), StatusBar.TYPE.OK);
+                    return;
+                }
+                StatusBar.Instance.Log("Нечего редактировать", StatusBar.TYPE.INFO);
+            }
+            else
+            {
+                db.Entry(selectedOrder).Reload();
+                dataGridView1.ItemsSource = db.Orders.ToArray();
+                StatusBar.Instance.Log("Отмена редактирования", StatusBar.TYPE.OK);
+            }
             MessageBox.Show(dataGridView1.SelectedItem.ToString());
         }
 
