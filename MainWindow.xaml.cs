@@ -86,9 +86,9 @@ namespace wpf_practical
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!Parser.Name(nameInput.Text))
+            if (nameInput.SelectedItem==null)
             {
-                Notify("Некорректное ФИО/Название", StatusBar.TYPE.ERROR);
+                Notify("Выберите клиента из списка", StatusBar.TYPE.ERROR);
                 return;
             }
             if (SelectedService == null)
@@ -101,14 +101,24 @@ namespace wpf_practical
                 Notify("Некорректый объём услуги", StatusBar.TYPE.ERROR);
                 return;
             }
+            if (dateInput.SelectedDate == null)
+            {
+                Notify("Выберите дату", StatusBar.TYPE.ERROR);
+                return;
+            }
+            if (discountInput.Text == "")
+                discountInput.Text = "0";
 
             //services.Add(new ServiceArray(0, "18.02.2023", "Иванов Иван Иванович", "Замена масла", "Обслуживание авто", "2д0ч0м", 0, 1000, true));
-            
+
             //db.Orders.Add(new Order((int)Convert.ToInt16(orderNumber.Value), dateInput.SelectedDate.HasValue? (DateTime)dateInput.SelectedDate : DateTime.Today, nameInput.SelectedItem as Client, serviceInput.Text, serviceTypeInput.Text, timeInput.Text, Convert.ToInt16(discountInput.Text), Convert.ToInt16(costInput.Text), (done.IsChecked.HasValue? (bool)done.IsChecked : false )));
-            
+
             //db.SaveChanges();
             //dataGridView1.ItemsSource = db.Orders.ToArray();
-            statusBar.Log("Запись не сохранена, сначала почини что сломал", StatusBar.TYPE.OK);
+            db.Orders.Add(new Order((DateTime)(dateInput.SelectedDate), (Client)nameInput.SelectedItem, SelectedService, timeInput.Text, Convert.ToInt32(discountInput.Text), done.IsChecked == null ? false : (bool)done.IsChecked));
+            db.SaveChanges();
+            dataGridView1.ItemsSource = db.Orders.ToArray();
+            statusBar.Log("Запись сохранена", StatusBar.TYPE.OK);
         }
 
         private void Window_Closed(object sender, EventArgs e) // Как бы выцепить причину закрытия (userexit/crash)
@@ -273,6 +283,30 @@ namespace wpf_practical
             {
             
             }
+        }
+        private void ServiceListMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var menu = new SelectServiceWindow();
+            if (menu.ShowDialog() == true)
+            {
+
+            }
+        }
+
+        private void AddServiceMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var menu = new NewServiceWindow();
+            if (menu.ShowDialog() == true)
+            {
+                db.Services.Add(menu.Service);
+                db.SaveChanges();
+            }
+        }
+
+        private void RefreshOrdersTable(object sender, RoutedEventArgs e)
+        {
+            dataGridView1.ItemsSource = db.Orders.ToArray();
+            nameInput.ItemsSource = db.Clients.ToArray();
         }
     }
 }

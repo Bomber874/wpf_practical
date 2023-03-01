@@ -15,12 +15,20 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Click="SelectButton_Click">Выбрать</MenuItem>
+            </ContextMenu>
+        </Grid.ContextMenu>
         <!--Без понятия, зачем я сделал 2 стлбца, наверное чтобы теперь прописывать элементам это-->
         <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" x:Name="SelectedServiceLabel" Grid.ColumnSpan="2">Выберите услугу из раскрывающегося списка ниже:</TextBlock>
         <TreeView Grid.Row="1" Grid.ColumnSpan="2" x:Name="tvServices" SelectedItemChanged="tvServices_SelectedItemChanged"></TreeView>
-        <Button Grid.Row="2" Grid.ColumnSpan="2" Click="Button_Click">Выбрать</Button>
-        
+        <Button Grid.Row="2" Grid.ColumnSpan="2" Click="AddButton_Click">Добавить услугу</Button>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Click="EditButton_Click">Изменить услугу</Button>
+        <Button Grid.Row="4" Grid.ColumnSpan="2" Click="DeleteButton_Click">Удалить услугу</Button>
     </Grid>
 </Window>

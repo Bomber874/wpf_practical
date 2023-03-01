@@ -26,7 +26,11 @@ namespace wpf_practical.windows
         {
             InitializeComponent();
             db = classes.dbModel.Instance;
-
+            RefreshItems();
+        }
+        private void RefreshItems()
+        {
+            tvServices.Items.Clear();
             var Categories = db.ServiceCategories.ToArray();
             var Servcies = db.Services.ToArray();
             // Штука неоптимизированная, много лишних итераций
@@ -36,7 +40,7 @@ namespace wpf_practical.windows
             {
                 var item = new TreeViewItem();
                 item.Header = c.Name;
-                foreach (Service s in Servcies.Where(s => (s.ServiceCategoryID == c.ID)) )
+                foreach (Service s in Servcies.Where(s => (s.ServiceCategoryID == c.ID)))
                 {
                     item.Items.Add(s);
                 }
@@ -51,7 +55,7 @@ namespace wpf_practical.windows
             Service = (Service)tvServices.SelectedItem;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.Service == null)
             {
@@ -60,6 +64,54 @@ namespace wpf_practical.windows
             }
             DialogResult = true;
             Close();
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            var menu = new NewServiceWindow();
+            if (menu.ShowDialog() == true)
+            {
+                db.Services.Add(menu.Service);
+                db.SaveChanges();
+                RefreshItems();
+            }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Service == null)
+            {
+                MessageBox.Show("Вы не выбрали услугу");
+                return;
+            }
+            var menu = new NewServiceWindow(this.Service);
+            if (menu.ShowDialog() == true)
+            {
+                db.SaveChanges();
+                RefreshItems();
+            }
+            else
+            {
+                db.Entry(this.Service).Reload();
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Service == null)
+            {
+                MessageBox.Show("Вы не выбрали услугу");
+                return;
+            }
+            //MessageBox.Show(db.Orders.ToArray().Where(o => o.ServiceID == this.Service.ID).First().Service.ToString());
+            if (db.Orders.ToArray().Where(o => o.ServiceID == this.Service.ID).Count() > 0)
+            {
+                MessageBox.Show("Нельзя удалить эту услугу, т.к. она зарегестрирована в одном из заказов");
+                return;
+            }
+            db.Services.Remove(this.Service);
+            db.SaveChanges();
+            RefreshItems();
         }
     }
 }

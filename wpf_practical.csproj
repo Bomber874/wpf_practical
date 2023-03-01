@@ -113,6 +113,9 @@
     <Compile Include="windows\NewServiceCategoryWindow.xaml.cs">
       <DependentUpon>NewServiceCategoryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\NewServiceWindow.xaml.cs">
+      <DependentUpon>NewServiceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\SaveDialogue.xaml.cs">
       <DependentUpon>SaveDialogue.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\NewServiceCategoryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\NewServiceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

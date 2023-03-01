@@ -12,12 +12,18 @@
             <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ListBox x:Name="Categories" DisplayMemberPath="Name"></ListBox>
+        <ListBox x:Name="Categories" DisplayMemberPath="Name">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Выбрать услугу" Click="SelectService"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
 
         <DockPanel Grid.Row="1">
-            <Button x:Name="Add" Click="Add_Click" DockPanel.Dock="Top" >Добавить</Button>
-            <Button x:Name="Edit" Click="Edit_Click" DockPanel.Dock="Top" >Изменить</Button>
-            <Button x:Name="Delete" Click="Delete_Click" DockPanel.Dock="Top" >Удалить</Button>
+            <Button x:Name="Add" Click="Add_Click" DockPanel.Dock="Top">Добавить категорию</Button>
+            <Button x:Name="Edit" Click="Edit_Click" DockPanel.Dock="Top">Изменить категорию</Button>
+            <Button x:Name="Delete" Click="Delete_Click" DockPanel.Dock="Top">Удалить категорию</Button>
         </DockPanel>
     </Grid>
 </Window>

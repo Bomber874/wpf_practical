@@ -13,13 +13,10 @@ namespace wpf_practical
     {
         public Order() { }
 
-        public Order(int iD, DateTime date, int clientID, Client client, int serviceID, Service service, string time, int discount, bool done)
+        public Order(DateTime date, Client client, Service service, string time, int discount, bool done)
         {
-            ID = iD;
             Date = date;
-            ClientID = clientID;
             Client = client;
-            ServiceID = serviceID;
             Service = service;
             Time = time;
             Discount = discount;

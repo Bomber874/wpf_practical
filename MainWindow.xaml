@@ -20,7 +20,7 @@
             <Menu>
                 <MenuItem Header="Действие">
                     <MenuItem Header="Выгрузить в файл" x:Name="saveMenuItem" Click="saveMenuItem_Selected"/>
-                    <MenuItem Header="Очистить таблицу" x:Name="clearMenuItem"/>
+                    <MenuItem Header="Обновить таблицу" Click="RefreshOrdersTable"/>
                 </MenuItem>
             </Menu>
 
@@ -30,8 +30,8 @@
             <Menu>
                 <MenuItem Header="Услуги и категории">
                     <MenuItem Header="Услуги">
-                        <MenuItem Header="Добавить"/>
-                        <MenuItem Header="Список услуг"/>
+                        <MenuItem Click="AddServiceMenuItem_Click" Header="Добавить"/>
+                        <MenuItem Click="ServiceListMenuItem_Click" Header="Список услуг"/>
                     </MenuItem>
                     <MenuItem Header="Категории">
                         <MenuItem Click="AddServiceCategoryMenuItem_Click" Header="Добавить"/>

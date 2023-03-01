@@ -20,6 +20,7 @@ namespace wpf_practical.windows
     /// </summary>
     public partial class ServiceCategoriesList : Window
     {
+        public ServiceCategory ServiceCategory;
         public ServiceCategoriesList()
         {
             InitializeComponent();
@@ -57,6 +58,17 @@ namespace wpf_practical.windows
             }
         }
 
+        private void SelectService(object sender, RoutedEventArgs e)
+        {
+            if (Categories.SelectedItem == null)
+            {
+                MessageBox.Show("Не выбрана категория для редактирования");
+                return;
+            }
+            this.ServiceCategory = Categories.SelectedItem as ServiceCategory;
+            DialogResult = true;
+            Close();
+        }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if (Categories.SelectedItem == null)
