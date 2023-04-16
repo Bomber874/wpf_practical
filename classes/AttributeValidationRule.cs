@@ -22,30 +22,29 @@ namespace wpf_practical.classes
             return ValidationResult.ValidResult;
         }
 
-        void GetParentBinding(BindingExpressionBase owner)
-        {
-            string o = "";
-            Type BEBfieldsType = owner.GetType();
+        //void GetParentBinding(BindingExpressionBase owner)
+        //{
+        //    string o = "";
+        //    Type BEBfieldsType = owner.GetType();
 
-            FieldInfo[] fields = BEBfieldsType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
+        //    FieldInfo[] fields = BEBfieldsType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
 
-            //PropertyPath pp = (PropertyPath)BEBfieldsType.GetField("_ppath", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static).GetValue(owner);
-            //MessageBox.Show(pp.Path);
-            for (int i = 0; i < fields.Length; i++)
-            {
-                o += $"{fields[i].Name}, {fields[i].GetValue(owner)}" + '\n';
-            }
-            Clipboard.SetText(o);
-            MessageBox.Show(o);
+        //    //PropertyPath pp = (PropertyPath)BEBfieldsType.GetField("_ppath", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static).GetValue(owner);
+        //    //MessageBox.Show(pp.Path);
+        //    for (int i = 0; i < fields.Length; i++)
+        //    {
+        //        o += $"{fields[i].Name}, {fields[i].GetValue(owner)}" + '\n';
+        //    }
+        //    Clipboard.SetText(o);
+        //    MessageBox.Show(o);
 
-            string o2 = "";
+        //    string o2 = "";
 
-        }
+        //}
         object GetValidatingObject(BindingExpressionBase owner)
         {
             Type BBType = owner.GetType();
             WeakReference weakReference = (WeakReference)BBType.GetField("_dataItem", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static).GetValue(owner);
-            //MessageBox.Show(weakReference.Target.ToString());
             return weakReference.Target;
         }
         string GetPropertyName(BindingBase owner)
@@ -61,24 +60,19 @@ namespace wpf_practical.classes
             PropertyInfo fieldInfo = OType.GetProperty(PropertyName);
             object[] attributes = fieldInfo.GetCustomAttributes(true);
             List<ValidationAttribute> result = new List<ValidationAttribute>();
-            string o = "";
             foreach (object attribute in attributes)
             {
                 if (attribute is ValidationAttribute)
                 {
                     result.Add((ValidationAttribute)attribute);
                 }
-                o += attribute.ToString()+'\n';
             }
-            //MessageBox.Show(o);
             return result;
         }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo, BindingExpressionBase owner)
         {
-            //GetPropertyName(owner);
-            //GetParentBinding(owner);
-            //GetValidatingObject(owner);
+
             object ValidatingObject = GetValidatingObject(owner);
             string PName = GetPropertyName(owner.ParentBindingBase);
             List<ValidationAttribute> validationAttributes = GetValidationAttributes(ValidatingObject, PName);
