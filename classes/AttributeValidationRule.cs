@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Xml.Linq;
 using ValidationResult = System.Windows.Controls.ValidationResult;
 
 namespace wpf_practical.classes
@@ -18,8 +19,6 @@ namespace wpf_practical.classes
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-
-
             return ValidationResult.ValidResult;
         }
 
@@ -56,13 +55,41 @@ namespace wpf_practical.classes
             return pp.Path;
         }
 
+        List<ValidationAttribute> GetValidationAttributes(object Object, string PropertyName)
+        {
+            Type OType = Object.GetType().BaseType;
+            PropertyInfo fieldInfo = OType.GetProperty(PropertyName);
+            object[] attributes = fieldInfo.GetCustomAttributes(true);
+            List<ValidationAttribute> result = new List<ValidationAttribute>();
+            string o = "";
+            foreach (object attribute in attributes)
+            {
+                if (attribute is ValidationAttribute)
+                {
+                    result.Add((ValidationAttribute)attribute);
+                }
+                o += attribute.ToString()+'\n';
+            }
+            //MessageBox.Show(o);
+            return result;
+        }
+
         public override ValidationResult Validate(object value, CultureInfo cultureInfo, BindingExpressionBase owner)
         {
             //GetPropertyName(owner);
             //GetParentBinding(owner);
-            GetValidatingObject(owner);
-
-            MessageBox.Show(GetPropertyName(owner.ParentBindingBase));
+            //GetValidatingObject(owner);
+            object ValidatingObject = GetValidatingObject(owner);
+            string PName = GetPropertyName(owner.ParentBindingBase);
+            List<ValidationAttribute> validationAttributes = GetValidationAttributes(ValidatingObject, PName);
+            foreach (ValidationAttribute validationAttribute in validationAttributes)
+            {
+                if (!validationAttribute.IsValid(value))
+                {
+                    return new ValidationResult(false, validationAttribute.ErrorMessage);
+                }
+            }
+            //MessageBox.Show(GetPropertyName(owner.ParentBindingBase));
 
 
             return base.Validate(value, cultureInfo, owner);
