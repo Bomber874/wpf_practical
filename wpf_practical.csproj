@@ -92,6 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="classes\AttributeValidationRule.cs" />
     <Compile Include="classes\Client.cs" />
     <Compile Include="classes\ClientModel.cs" />
     <Compile Include="classes\CSV.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,7 @@ namespace wpf_practical
         public int ServiceID { get; set; }
         public virtual Service Service { get; set; }    //Нужно уточнить, как это работает
         public string Time { get; set; }
+        [Range(0,100,ErrorMessage = "Допустимый диапазон: 0-100")]
         public int Discount { get; set; }
         public bool Done { get; set; }
 

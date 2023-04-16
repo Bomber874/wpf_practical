@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_practical.windows"
+        xmlns:classes="clr-namespace:wpf_practical.classes"
         mc:Ignorable="d"
         Title="EditOrderWindow" Height="450" Width="800">
     <Grid>
@@ -34,11 +35,27 @@
         </DockPanel>
         <DockPanel Grid.Row="3" Grid.ColumnSpan="2">
             <Label DockPanel.Dock="Top">Объём услуги:</Label>
-            <TextBox Text="{Binding Time}"></TextBox>
+            <TextBox>
+                <TextBox.Text>
+                    <Binding Path="Time" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <classes:AttributeValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </DockPanel>
         <DockPanel Grid.Row="4" Grid.ColumnSpan="2">
             <Label DockPanel.Dock="Top">Скидка:</Label>
-            <TextBox Text="{Binding Discount}"></TextBox>
+            <TextBox>
+                <TextBox.Text>
+                    <Binding Path="Discount" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <classes:AttributeValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </DockPanel>
         <DockPanel Grid.Row="5" Grid.ColumnSpan="2">
             <Label DockPanel.Dock="Top">Услуга оказана?:</Label>
