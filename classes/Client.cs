@@ -27,7 +27,6 @@ namespace wpf_practical
         {
             get { return this.FullName(); }
         }
-
         public string FullName()
         {
             return $"{this.FirstName} {this.LastName}";

@@ -100,6 +100,7 @@
     <Compile Include="classes\dbModel.cs" />
     <Compile Include="classes\OrderModel.cs" />
     <Compile Include="classes\Order.cs" />
+    <Compile Include="classes\SearchViewModel.cs" />
     <Compile Include="classes\ServiceCategory.cs" />
     <Compile Include="classes\Service.cs" />
     <Compile Include="windows\ClientsList.xaml.cs">
@@ -126,6 +127,9 @@
     </Compile>
     <Compile Include="windows\ServiceCategoriesList.xaml.cs">
       <DependentUpon>ServiceCategoriesList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\SearchWindow.xaml.cs">
+      <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\ViewLogWindow.xaml.cs">
       <DependentUpon>ViewLogWindow.xaml</DependentUpon>
@@ -171,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\ServiceCategoriesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\SearchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

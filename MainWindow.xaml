@@ -45,6 +45,7 @@
                     <MenuItem Header="Список клиентов" x:Name="showClients" Click="showClients_Click"/>
                 </MenuItem>
             </Menu>
+            <Button x:Name="openSearchView" Click="openSearch_Click">Поиск</Button>
         </ToolBar>
         <WrapPanel Grid.Row="1" Grid.Column="0">
             <DockPanel>

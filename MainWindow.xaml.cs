@@ -197,6 +197,13 @@ namespace wpf_practical
             ViewLogWindow viewForm = new ViewLogWindow(log);
             viewForm.ShowDialog();
         }
+        private void openSearch_Click(object sender, RoutedEventArgs e)
+        {
+
+            SearchWindow viewForm = new SearchWindow();
+            viewForm.ShowDialog();
+        }
+
 
         private void addClientMenuItem_Click(object sender, RoutedEventArgs e)
         {
